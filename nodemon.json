@@ -1,8 +1,0 @@
-{
-    "watch": ["*.ts"],
-    "ignore": ["*.js"],
-    "execMap": {
-      "ts": "ts-node"
-    },
-    "ext": "ts"
-}
