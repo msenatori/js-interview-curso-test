@@ -1,0 +1,7 @@
+POST  http://localhost:3000/cursos/enroll
+Content-Type: application/json
+
+{
+        "curso": "Curso 1",
+        "email": "test@test.com"
+ }
