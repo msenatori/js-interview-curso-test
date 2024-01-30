@@ -1,6 +1,6 @@
-import express from 'express';
-import rateLimit from 'express-rate-limit';
-import { v4 } from 'uuid';
+const express = require('express');
+const rateLimit = require('express-rate-limit');
+const { v4 } = require('uuid');
 
 const app = express();
 
