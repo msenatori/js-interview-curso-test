@@ -1,40 +1,58 @@
-# API Cursos
+---
+name: API Rate Limiting with Vercel KV and Upstash
+slug: api-rate-limit-upstash
+description: Rate limit your Next.js application with Vercel KV and Upstash.
+framework: Next.js
+useCase: Edge Functions
+css: Tailwind
+deployUrl: https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/edge-functions/api-rate-limit?project-name=api-rate-limit&repository-name=api-rate-limit&stores=%5B%7B"type"%3A"kv"%7D%5D
+demoUrl: https://edge-functions-api-rate-limit.vercel.app
+relatedTemplates:
+  - api-rate-limit-and-tokens
+  - vercel-middleware-kv-redis
+---
 
-Permite gestionar cursos y estudiantes.
+# API Rate Limiting with Vercel KV and Upstash
 
-## Descripción
+This example features API Rate limiting at the edge with [Vercel KV](https://vercel.com/docs/storage/vercel-kv).
 
-El proyecto API Cursos es una API RESTful que permite gestionar cursos y estudiantes.
+## Demo
 
-## Requisitos
+https://edge-functions-api-rate-limit.vercel.app
 
-- Node.js 16 o superior
+## How to Use
 
-## Instalación
+You can choose from one of the following two methods to use this repository:
 
-1. Clona este repositorio.
-2. Ejecuta `npm install` para instalar las dependencias.
-3. Configura las variables de entorno en un archivo `.env`.
-4. Ejecuta `npm run dev` para iniciar el servidor.
+### One-Click Deploy
 
-## Uso
+Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme):
 
-TODO
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/edge-functions/api-rate-limit?project-name=api-rate-limit&repository-name=api-rate-limit&stores=%5B%7B"type"%3A"kv"%7D%5D)
 
-## Ejemplo de API
+### Clone and Deploy
 
-TODO
+Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
 
-## Contribución
+```bash
+pnpm create next-app --example https://github.com/vercel/examples/tree/main/edge-functions/api-rate-limit api-rate-limit
+```
 
-Si quieres contribuir a este proyecto, sigue los siguientes pasos:
+Next, create a [Vercel KV](https://vercel.com/docs/storage/vercel-kv) database on your account and connect it to your project.
 
-1. Haz un fork del repositorio.
-2. Crea una rama con tu nueva funcionalidad (`git checkout -b feature/nueva-funcionalidad`).
-3. Realiza los cambios necesarios y haz commit (`git commit -am 'Agrega nueva funcionalidad'`).
-4. Sube los cambios a tu repositorio remoto (`git push origin feature/nueva-funcionalidad`).
-5. Abre un pull request en este repositorio.
+Copy the example `.env.local` file shown in the dashboard with the credentials needed to connect to your Redis database. It should look similar to this:
 
-## Licencia
+```bash
+KV_URL="redis://..."
+KV_REST_API_URL="https://..."
+KV_REST_API_TOKEN="AXx3ASQ..."
+KV_REST_API_READ_ONLY_TOKEN="Anx3ASQ..."
+```
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](./LICENSE) para más detalles.
+Next, run Next.js in development mode:
+
+```bash
+pnpm dev
+```
+
+Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=edge-middleware-eap) ([Documentation](https://nextjs.org/docs/deployment)).
