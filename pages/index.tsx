@@ -1,32 +1,102 @@
 import { Layout, Page, Text, Link } from '@vercel/examples-ui'
 import Headers from '@components/headers'
-
 export default function Index() {
+
+  const style = {
+    backgroundColor: '#f4f4f4',
+    border: '1px solid #ddd',
+    padding: '10px',
+    borderRadius: '5px',
+    overflow: 'auto',
+    fontFamily: 'monospace',
+    color: '#333',
+  };
+
   return (
     <Page>
       <Text variant="h2" className="mb-6">
-        API Rate Limiting with Vercel KV
+        API Courses
       </Text>
       <Text className="mb-4">
-        By using Redis with Vercel KV, we can keep a counter of requests by IP
-        address.
+       /api/courses/enroll
+      </Text>
+      <Text className="mb-4">
+        For the demo below, you can send a maximum of{' '}
+        <b>5 requests every 1 seconds</b>.
+        This endpoint can process only one enrollment per request.
+      </Text>
+      <Text className="mb-4">
+        Request payload example:
+      </Text>
+      <pre className="mb-4" style={style}>
+        <code>
+        {`
+        {
+          "curso": "string",
+          "email": "string"
+        }`
+        }
+        </code>
+      </pre>
+      <Text className="mb-4">
+        Response payload example:
+      </Text>
+      <pre className="mb-4" style={style}>
+        <code>
+        {`
+        {
+          message: "string",
+          data: {  
+            "curso": "string",
+            "email": "string",
+            "curso_enroll_id": "uuid"
+          }
+        }`
+        }
+        </code>
+      </pre>
+      <Headers path="/api/courses/enroll">Make a request</Headers>
+      <Text className="mb-4">
+       /api/courses/batch
       </Text>
       <Text className="mb-4">
         For the demo below, you can send a maximum of{' '}
         <b>5 requests every 10 seconds</b>.
+        This endpoint can process multiple enrollments at once, maximum of 100 per request.
       </Text>
-      <Headers path="/api/ping">Make a request</Headers>
-      <Text>
-        The pattern we&apos;re using in this example is inspired by the{' '}
-        <Link
-          href="https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub API
-        </Link>
-        .
+      <Text className="mb-4">
+        Request payload example:
       </Text>
+      <pre className="mb-4" style={style}>
+        <code>
+        {`
+        [
+          {
+            "curso": "string",
+            "email": "string"
+          }
+        ]`
+        }
+        </code>
+      </pre>
+      <Text className="mb-4">
+        Response payload example:
+      </Text>
+      <pre className="mb-4" style={style}>
+        <code>
+        {`
+        {
+          message: "string",
+          data: [{  
+            "curso": "string",
+            "email": "string",
+            "curso_enroll_id": "uuid"
+          }]
+        }`
+        }
+        </code>
+      </pre>
+      <Headers path="/api/courses/enroll/batch">Make a request</Headers>
     </Page>
   )
 }

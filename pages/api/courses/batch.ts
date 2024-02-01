@@ -6,7 +6,7 @@ import { v4 } from 'uuid'
 const ratelimit = new Ratelimit({
   redis: kv,
   // 5 requests from the same IP in 10 seconds
-  limiter: Ratelimit.slidingWindow(5, '1 s'),
+  limiter: Ratelimit.slidingWindow(5, '10 s'),
 })
 
 export const config = {
@@ -30,21 +30,36 @@ export default async function handler(request: NextRequest) {
                 })
             }
 
-            const estudiante  = await request.json()
+            const cursos  = await request.json()
 
-            if (!estudiante || !estudiante.email || !estudiante.curso) {
+            if (!cursos || !cursos.length) {
                 return  new Response(JSON.stringify({ 
                   error: { message: `Invalid payload` }
-               }), {
+                }), {
                   status: 400
-              })
+                })
             }
-        
-            const enrolled =  {...estudiante, curso_enroll_id: v4()}
+
+            if (cursos.length > 100) {
+                return  new Response(JSON.stringify({ 
+                  error: { message: `Max 100 courses` }
+                }), {
+                  status: 400
+                })
+            }
+
+            const cursosFilled = cursos.map(async (curso: any) => {
+              if (!curso || !curso.email || !curso.curso) {
+                throw new Error('Invalid payload')
+              }
+
+              return  {...curso, curso_enroll_id: v4()}
+            })
+
 
             return new Response(JSON.stringify({
                 message: 'Enrolled',
-                data: enrolled
+                data: cursosFilled
               }), {
                 status: 200,
                 headers: {
