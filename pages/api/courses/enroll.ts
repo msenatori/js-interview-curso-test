@@ -6,7 +6,7 @@ import { v4 } from 'uuid'
 const ratelimit = new Ratelimit({
   redis: kv,
   // 5 requests from the same IP in 10 seconds
-  limiter: Ratelimit.slidingWindow(5, '10 s'),
+  limiter: Ratelimit.slidingWindow(5, '1 s'),
 })
 
 export const config = {
